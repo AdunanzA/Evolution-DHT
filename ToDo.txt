@@ -1,0 +1,22 @@
+4.1 svegliare il can bucketlist.cs e l'amico Storage.cs
+4.2 Bug del kad.xml con troppi nodi (es. 2) in lista
+4.3 Forse dovremo spostare nel core la gestione della lista nodi ed esporla come api
+5 Gestire le eccezioni durante la deserializzazione dei pacchetti
+>6 Test ricerche con molti piu' nodi online (>5)
+1.1 Spostare i process(pacchetto) da Client.cs?
+1.4 Sistemare / refactor la classe Peer/Peerid 
+8.1 Decidere tipo di encoding una volta per tutte
+9.1 Rinominare onupdatedpeer in onpeerupdated ecc
+10.1 scegliere ed usare offuscamento protocollo
+11.0 Rework della classe client in stile engine.start() engine.boostrap(). (eliminare le abstract?)
+12 Inserire procedura diu salvataggio dei nodi scaricati (bootstrap?)
+15. thread di hashing in background
+16 procedura per rilevamento sw p2p (per emule fatto)
+17 procedura per pubblicazione files da sw p2p esterni
+19 scambio fonti (non si applica a noi? non facciamo download)
+>>> 20 vagliare la ricerca per ricorsione
+21 Vagliare l'introduzione della soglia di vicinanza nella scelta dei peers durante la pubblicazione
+23 UPNP dobrebbe essere supportata nella lib non nell gui
+22 Discutere se e come ritornare le liste di fonti/value nelle ricerche 
+	(impedire la sovrascrittura chiave/valore durante la pubblicazione)
+>24 Test in remoto

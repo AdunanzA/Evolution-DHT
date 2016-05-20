@@ -1,0 +1,216 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
+using Dreams.Dht.Util;
+
+namespace Dreams.Kademlia
+{
+    public class FindNodeThread
+    {
+        public delegate void FinishHandler(FindNodeThread thread);
+        public event FinishHandler Finish;
+ 
+        private Client client;
+        private PeerId keyId;
+        private Thread thread;
+
+        public Client Client
+        {
+            get { return client; }
+        }
+
+        public PeerId KeyId
+        {
+            get { return keyId; }
+        }
+
+        public FindNodeThread(Client client, PeerId keyId)
+        {
+            this.client = client;
+            this.keyId = keyId;
+        }
+        
+        // costruttore aggiunto temporaneamente per eliminare il ricalcolo dell'hash della key ogni volta
+        public FindNodeThread(Client client, string key)
+        {
+            this.client = client;
+            this.keyId = new PeerId();
+            keyId.Id = HexEncoding.GetBytes(key);
+<<<<<<< local
+        }
+
+        public void Start()
+        {
+            thread = new Thread(Run);
+            thread.Name = "FindNodeThread";
+            thread.Start();
+        }
+
+        public void Abort()
+        {
+            thread.Abort();
+        }
+
+        public void Join()
+        {
+            thread.Join();
+        }
+
+        public virtual void ProcessMessage(IMessage message)
+        {
+            if (message.opcode == Opcode.FindnodeResponse)
+            {
+                foreach (var peer in message.peers)
+                {
+                    // Cosa avra' voluto dire?? (cit.)
+                    if (peer.Id.ToString() == KeyId.ToString())
+                    {
+                    }
+                }
+            }
+        }
+
+        protected virtual Message CreateFindRequest()
+        {
+            var message = new Message(Client.Me);
+            message.CreateFindNodeRequest(KeyId);
+            return message;
+        }
+
+        protected virtual void Run()
+        {
+            Message message = CreateFindRequest();
+
+            DateTime lastSend = DateTime.Now;
+
+            List<PeerInfo> peers = client.GetCloserPeers(KeyId, client.Alfa);
+            lock (client)
+            {
+                foreach (PeerInfo peer in peers)
+                {
+                    lastSend = DateTime.Now;
+                    Client.Send(message, peer);
+                }
+            }
+
+            //WaitForNeearPeers
+            while ((DateTime.Now - lastSend).TotalMilliseconds < 2*1000)
+            {
+                Thread.Sleep(10);
+                List<PeerInfo> newPeers = client.GetCloserPeers(KeyId, client.Alfa);
+                foreach (PeerInfo newPeer in newPeers)
+                {
+                    bool nearer = true;
+                    foreach (PeerInfo oldPeer in peers)
+                    {
+                        if (PeerId.CalculateDistance(oldPeer.Id, KeyId) <= PeerId.CalculateDistance(newPeer.Id, KeyId))
+                        {
+                            nearer = false;
+                        }
+                    }
+                    if (nearer)
+                    {
+                        lastSend = DateTime.Now;
+                        peers.Add(newPeer);
+                        Client.Send(message, newPeer);
+                    }
+                }
+            }
+
+            if (Finish != null)
+            {
+                Finish(this);
+            }
+        }
+    }
+}
+=======
+        }
+
+        public void Start()
+        {
+            thread = new Thread(Run);
+            thread.Name = "FindNodeThread";
+            thread.Start();
+        }
+
+        public void Abort()
+        {
+            thread.Abort();
+        }
+
+        public void Join()
+        {
+            thread.Join();
+        }
+
+        public virtual void ProcessMessage(IMessage message)
+        {
+            if (message.opcode == Opcode.FindnodeResponse)
+            {
+                foreach (var peer in message.peers)
+                {
+                    // Cosa avra' voluto dire?? (cit.)
+                    if (peer.Id.ToString() == KeyId.ToString())
+                    {
+                    }
+                }
+            }
+        }
+
+        protected virtual Message CreateFindRequest()
+        {
+            var message = new Message(Client.Me);
+            message.CreateFindNodeRequest(KeyId);
+            return message;
+        }
+
+        protected virtual void Run()
+        {
+            Message message = CreateFindRequest();
+
+            DateTime lastSend = DateTime.Now;
+
+            List<PeerInfo> peers = client.GetCloserPeers(KeyId, client.Alfa, "findnodethread");
+            lock (client)
+            {
+                foreach (PeerInfo peer in peers)
+                {
+                    lastSend = DateTime.Now;
+                    Client.Send(message, peer);
+                }
+            }
+
+            //WaitForNeearPeers
+            while ((DateTime.Now - lastSend).TotalMilliseconds < 2*1000)
+            {
+                Thread.Sleep(10);
+                List<PeerInfo> newPeers = client.GetCloserPeers(KeyId, client.Alfa,"findnodethreadrun" );
+                foreach (PeerInfo newPeer in newPeers)
+                {
+                    bool nearer = true;
+                    foreach (PeerInfo oldPeer in peers)
+                    {
+                        if (PeerId.CalculateDistance(oldPeer.Id, KeyId) <= PeerId.CalculateDistance(newPeer.Id, KeyId))
+                        {
+                            nearer = false;
+                        }
+                    }
+                    if (nearer)
+                    {
+                        lastSend = DateTime.Now;
+                        peers.Add(newPeer);
+                        Client.Send(message, newPeer);
+                    }
+                }
+            }
+
+            if (Finish != null)
+            {
+                Finish(this);
+            }
+        }
+    }
+}
+>>>>>>> other

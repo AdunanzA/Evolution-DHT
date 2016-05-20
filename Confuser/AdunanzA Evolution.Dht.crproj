@@ -1,0 +1,1 @@
+﻿<?xml version="1.0" encoding="utf-8"?><project outputDir=".\DevConsole\bin\RelObf\Confused" snKey="" xmlns="http://confuser.codeplex.com"><settings name="settings1" /><packer id="compressor" /><assembly path=".\DevConsole\bin\RelObf\Evolution.Dht.dll"><config id="settings1" /><module name="Evolution.Dht.dll"><config id="settings1" /></module></assembly></project>

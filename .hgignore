@@ -1,0 +1,12 @@
+.dll
+.cache
+.suo
+.user
+UpgradeLog.XML
+/bin
+/obj
+_UpgradeReport_Files/
+Backup/
+packages/
+.orig
+.dgml
