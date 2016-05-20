@@ -74,7 +74,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'RelObf|AnyCPU'">
     <OutputPath>bin\RelObf\</OutputPath>
@@ -86,6 +86,14 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HashLib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HashLib.2.0.1\lib\net40\HashLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Nat, Version=1.2.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Nat.1.2.24.0\lib\net40\Mono.Nat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net20\NLog.dll</HintPath>
     </Reference>
@@ -152,10 +160,6 @@
     <ProjectReference Include="..\Evolution.Dht\Evolution.Dht.csproj">
       <Project>{6c51c762-b197-416d-92d3-206300f2f480}</Project>
       <Name>Evolution.Dht</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mono.Nat\Mono.Nat.csproj">
-      <Project>{f5d74163-145f-47bf-83dc-d0e07249c6ca}</Project>
-      <Name>Mono.Nat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
